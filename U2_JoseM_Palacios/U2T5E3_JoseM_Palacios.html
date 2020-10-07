@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script type="text/javascript">
+
+        var noPrimos = 0;
+       
+        console.log("Múltiplos de 3: ");
+        for (var i = 0; i <= 499; i++) {
+
+            if (i% 3 == 0) {
+                console.log(i);
+            }
+
+            if (esPrimo(i) == false) {
+                noPrimos++;
+            }
+        }
+
+        console.log("Cantidad de numéros no primos: " + noPrimos);
+       
+        function esPrimo(num) {
+
+            for (var i = 2; i < num; i++) {
+
+                if (num % i == 0) {
+                    return false;
+                }
+            }
+
+            if (num != 1 || num!= 0)  {
+                
+                return true
+            }
+            
+        }
+    </script>
+</body>
+
+</html>

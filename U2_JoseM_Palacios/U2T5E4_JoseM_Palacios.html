@@ -1,0 +1,40 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>Actividad calificaciones</title>
+    <script type="text/javascript">
+
+        function verCalificacion(nota) {
+            nota = parseInt(nota);
+            switch (nota) {
+                case nota > 5:
+                    console.log('Suspenso');
+                case 5:                         // Ya que al entrar en un case del switch no existe un break, continua leyendo las siguientes sentencias y 
+                case 6:                         // saca por consola todas las calificaciones siguientes. En el caso de 5, imprime todas menos suspenso ya que
+                    console.log('Aprobado');    // salta esa línea al no cumplir la condición. En el caso de un valor menor que 5, el switch no capaz de 
+                                                // entender la operación nota > 5 y por ello salta a valor erróneo. 9 tiene el resultado esperado ya que no 
+                                                // está dentro de ningún case y salta a las sentencias de default.
+                case 7:
+                case 8:
+                    console.log('Notable');
+                case nota > 8:
+                    console.log('Sobresaliente');
+                default:
+                    console.log('Valor erroneo');
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <span> Ver resultado</span>
+    <br />
+    <input type="text" id='txtnota' value="5" />
+    <br />
+    <input type="button" onclick="verCalificacion(document.getElementById('txtnota').value);" value='Pulsar'>
+</body>
+
+</html>
