@@ -1,12 +1,17 @@
+
 var opt = "";
-        
-do {
+var res = true;
+
+while (res) {
     
-    opt.toLowerCase = prompt("¿Quiere comenzar una nueva partida?");
+    opt = prompt("¿Quiere comenzar una nueva partida?");
+
     if (opt == "si" || opt == "sí") {
-        randomGame();
-    } 
-} while (randomGame() != false);
+        res = randomGame();
+    } else {
+        res = false;
+    }
+}    
 
 
 function randomGame() {
