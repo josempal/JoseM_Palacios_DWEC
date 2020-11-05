@@ -13,19 +13,19 @@ function Vuelo(codigo, hora_llegada, hora_salida) {
     this.hora_salida = hora_salida;
     this.hora_llegada = hora_llegada;
 
-    function setHoraSalida(hora_salida) {
+    this.setHoraSalida = function(hora_salida) {
 
         this.hora_salida = hora_salida;
     }
     
-    function setHoraLlegada(hora_llegada) {
+    this.setHoraLlegada = function(hora_llegada) {
 
         this.hora_llegada = hora_llegada;
     }
 
-    function checkHora() {
+    this.checkHora = function() {
 
-        if (this.hora_salida > this.hora_salida) {
+        if (this.hora_salida < this.hora_llegada) {
             return 1;
         } else {
             return 0;
@@ -47,10 +47,7 @@ new Vuelo(10, "11:00", "12:00")]
 let arpto1 = new Aeropuerto("SVQ", "Sevilla", 
     arrVuelos);
 
-arpto1.nVuelo[0].hora_salida = "13:00";
-
-
-// arpto1.nVuelo[0].setHoraSalida("13:00");
+arpto1.nVuelo[0].setHoraSalida("13:00");
 
 if (arpto1.nVuelo[0].checkHora() == 1) {
 
@@ -60,9 +57,7 @@ if (arpto1.nVuelo[0].checkHora() == 1) {
     alert("ERROR. La hora de salida es superior a la de llegada ");
 }
 
-arpto1.nVuelo[0].hora_llegada = "14:00";
-
-// arpto1.nVuelo[0].setHoraLlegada("14:00");
+arpto1.nVuelo[0].setHoraLlegada("14:00");
 
 if (arpto1.nVuelo[0].checkHora() == 1) {
 
