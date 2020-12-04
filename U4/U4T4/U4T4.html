@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .msg-error {
+
+            color:red;
+        }
+
+        .input-error {
+
+            border: solid 2px red;
+        }
+    </style>
+</head>
+<body>
+    
+    <form action="" method="post" name="form1">
+        <label for="title">Título del álbum:</label>
+        <input type="text" name="title" id="title" placeholder="Título" />
+
+        <br>
+
+        <label for="gr_name">Nombre del grupo o cantante:</label>
+        <input type="text" name="gr_name" id="gr_name" placeholder="Nombre del grupo" />
+
+        <br>
+
+        <label for="pu_year">Año de publicación:</label>
+        <input type="text" name="pu_year" id="pu_year" placeholder="Año de publicación"/>
+        
+        <br>
+        
+        <label for="genre">Género musical:</label>
+        <select name="genre" id="genre">
+            <option value="rock" selected>Rock</option>
+            <option value="pop">Pop</option>
+            <option value="punk">Punk</option>
+            <option value="indie">Indie</option>
+        </select>
+        
+        <br>
+        
+        <label for="localiz">Localización (estanteria):</label>
+        <input type="text" name="localiz" id="localiz" placeholder="Localización" />
+        
+        <br>
+        
+        <label for="borrowed">Prestado:</label>
+        <input type="radio" name="borrowed" id="borrowed" value="true" /> Sí
+        <input type="radio" name="borrowed" id="borrowed" value="false" checked/> No
+
+        <br>
+
+        <button type="button" id="button">Enviar</button>
+    </form>
+
+    <div id="disc"></div>
+
+    <script src="U4T4.js"></script>
+</body>
+</html>

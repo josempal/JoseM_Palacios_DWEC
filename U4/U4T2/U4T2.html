@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>U4T2</title>
+  </head>
+  <!-- Vas a crear un juego que consiste en encontrar parejas en 12 cartas con 6 parejas  de los personajes de los Simpson.
+El juego consistirá en lo siguiente:
+    La aplicación deberá tener una tabla con 3 filas y cuatro columnas de un color.  Además habrá un cuadro de texto
+    con el valor 0 pero no modificable.
+    Cuando el usuario haga clic sobre una celda, se mostrará una imagen.
+    Cuando el usuario haga clic sobre otra celda, se mostrará otra imagen.
+    Si las dos imágenes son iguales, se cambiará el color de la celda y se añadirá 1  al cuadro de texto.
+    Si las dos imágenes son diferentes, se ocultarán mostrando nuevamente el  color inicial.
+En primer lugar, crea un esquema en una hoja con el arbol DOM del documento  html y en otra indica los métodos que vas
+a crear asociados a qué evento.
+Trata de utilizar el menor número de variables posibles: utiliza las propiedades de  los elementos para cambiar su
+comportamiento. -->
+
+  <style>
+    .card {
+      background-color: red;
+      width: 100px;
+      height: 92px;
+    }
+  </style>
+
+  <body>
+    <table class="tabla">
+      <tr class="row1">
+        <td class="col1">
+          <input class="card" type="image" value="" id="card_0" />
+          <input type="text" value="0" readonly="true" size="1" />
+        </td>
+        <td class="col2">
+          <input class="card" type="image" value="" id="card_1" />
+          <input type="text" value="0" readonly="true" size="1" />
+        </td>
+        <td class="col3">
+          <input class="card" type="image" value="" id="card_2" />
+          <input type="text" value="0" readonly="true" size="1" />
+        </td>
+        <td class="col4">
+          <input class="card" type="image" value="" id="card_3" />
+          <input type="text" value="0" readonly="true" size="1" />
+        </td>
+      </tr>
+      <tr class="row2">
+        <td class="col1">
+          <input class="card" type="image" value="" id="card_4" />
+          <input type="text" value="0" readonly="true" size="1" />
+        </td>
+        <td class="col2">
+          <input class="card" type="image" value="" id="card_5" />
+          <input type="text" value="0" readonly="true" size="1" />
+        </td>
+        <td class="col3">
+          <input class="card" type="image" value="" id="card_6" />
+          <input type="text" value="0" readonly="true" size="1" />
+        </td>
+        <td class="col4">
+          <input class="card" type="image" value="" id="card_7" />
+          <input type="text" value="0" readonly="true" size="1" />
+        </td>
+      </tr>
+      <tr class="row3">
+        <td class="col1">
+          <input class="card" type="image" value="" id="card_8" />
+          <input type="text" value="0" readonly="true" size="1" />
+        </td>
+        <td class="col2">
+          <input class="card" type="image" value="" id="card_9" />
+          <input type="text" value="0" readonly="true" size="1" />
+        </td>
+        <td class="col3">
+          <input class="card" type="image" value="" id="card_10" />
+          <input type="text" value="0" readonly="true" size="1" />
+        </td>
+        <td class="col4">
+          <input class="card" type="image" value="" id="card_11" />
+          <input type="text" value="0" readonly="true" size="1" />
+        </td>
+      </tr>
+    </table>
+    <div></div>
+
+    <script src="U4T2.js"></script>
+  </body>
+</html>
