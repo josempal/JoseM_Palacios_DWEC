@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen_U4</title>
+    <style>
+        .error {
+
+            border: 1px solid red;
+        }
+
+        .success {
+
+            border: 1px solid green;
+        }
+    </style>
+</head>
+<body>
+    <form action="">
+
+        <label for="name">Nombre del modelo</label>
+        <input type="text" id="name" name="name">
+
+        <br><br>
+        
+        <label for="model">Tipo de modelo</label>
+        <select name="model" id="model">
+            <option value="0">Seleccione un modelo</option>
+            <option value="televisor">Televisor</option>
+            <option value="frigorifico">Frigorifico</option>
+            <option value="lavadora">Lavadora</option>
+            <option value="microondas">Microondas</option>
+            <option value="lavavajillas">Lavavajillas</option>
+        </select>
+
+        <br><br>
+
+        <label for="date">Fecha de creación</label>
+        <input type="text" name="date" id="date">
+
+        <br><br>
+
+        <label for="energ">Consumo energético</label>
+        <input type="text" name="energ" id="energ">
+
+        <br><br>
+
+        <label for="mod-ref">Referencia de módelo</label>
+        <input type="text" name="mod-ref" id="mod-ref">
+
+        <br><br>
+
+        <label for="pw">Contraseña</label>
+        <input type="password" name="pw" id="pw">
+
+        <br><br>
+
+        <button type="reset" id="reset">Limpiar</button>
+        <button type="submit" id="submit">Enviar</button>
+    </form>
+
+    <div id="error"></div>
+
+    <div id="ref"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
