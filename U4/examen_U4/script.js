@@ -14,16 +14,22 @@ function initiate() {
 
 function validate() {
 
+    document.getElementById("error").innerHTML = "";
+
     if (validateModelName(), validateModelType(), validateDate(),
             validateEnergetic(), validateReference(), validatePassword()) {
 
         document.getElementById("ref").innerHTML = getCookie("referencia");
-        let form = document.form.elements;
+        
+        let form = document.getElementById("form1");
 
-        for (x in form) {
+        form.reset();
 
-            x.reset();
+        for (x of form) {           
+            
+            clearError(x);
         }
+
         return true;
     } else {
 
@@ -49,7 +55,7 @@ function validateModelName() {
         return true;
     } else {
 
-        document.getElementById("error").innerHTML = "El nombre del modelo no puede estar vacío";
+        document.getElementById("error").innerHTML += "El nombre del modelo no puede estar vacío <br>";
         error(name);
         return false;
     }
@@ -68,7 +74,7 @@ function validateModelType() {
         return true;
     } else {
 
-        document.getElementById("error").innerHTML = "Debe seleccionar un tipo de modelo";
+        document.getElementById("error").innerHTML += "Debe seleccionar un tipo de modelo <br>";
         error(type);
         return false;
     }
@@ -91,7 +97,7 @@ function validateDate() {
         return true;
     } else {
 
-        document.getElementById("error").innerHTML = "La fecha no tiene un formato correcto. Son válidos: dd/mm/yyyy o dd-mm-yyyy";
+        document.getElementById("error").innerHTML += "La fecha no tiene un formato correcto. Son válidos: dd/mm/yyyy o dd-mm-yyyy <br>";
         error(date);
         return false;
     }
@@ -113,7 +119,7 @@ function validateEnergetic() {
         return true;
     } else {
 
-        document.getElementById("error").innerHTML = "No corresponde a uno de los valores de consumo energético ";
+        document.getElementById("error").innerHTML += "No corresponde a uno de los valores de consumo energético <br>";
         error(energ);
         return false;
     }
@@ -139,7 +145,7 @@ function validateReference() {
         return true;
     } else {
 
-        document.getElementById("error").innerHTML = "La referencia del modelo no cumple el formato correcto";
+        document.getElementById("error").innerHTML += "La referencia del modelo no cumple el formato correcto <br>";
         error(ref);
         return false;
     }
@@ -162,7 +168,7 @@ function validatePassword() {
         return true;
     } else {
 
-        document.getElementById("error").innerHTML = "La contraseña es incorrecta";
+        document.getElementById("error").innerHTML += "La contraseña es incorrecta <br>";
         error(pw);
         return false;
     }
@@ -187,7 +193,7 @@ function setCookie(nombre, valor, expiracion) {
     let d = new Date();
     d.setTime(d.getTime() + expiracion * 24 * 60 * 60 * 1000);
     expiracion = "expires=" + d.toUTCString();
-    document.cookie = nombre + "=" + valor + ";" + expiracion + ";path=/";
+    document.cookie = nombre + "=" + valor + ";" + expiracion + ";path=/;secure";
 }
 
 function error(input) {
