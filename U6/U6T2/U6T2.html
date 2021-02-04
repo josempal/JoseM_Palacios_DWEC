@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U6T2</title>
+</head>
+
+<body>
+
+    <label for="localidad">Introduce una localidad</label>
+    <input type="text" name="localidad" id="localidad">
+    <br>
+    <button type="button" id="btn">Enviar</button>
+    <br>
+    <div class="resultado" id="resultado"></div>
+
+    <script>
+
+        document.getElementById("btn").addEventListener("click", compruebaLocalidad);
+
+        function compruebaLocalidad() {
+
+            let xhr = new XMLHttpRequest();
+
+            let localidad = document.getElementById("localidad").value;
+
+            xhr.open("GET", "localidad.php?localidad=" + localidad, true);
+
+            xhr.onreadystatechange = function() {
+
+                if (this.readyState == 4 && this.status == 200) {
+
+                    if (this.responseText === "\nSI") {
+
+                        document.getElementById("resultado").style.color = "green";
+                        document.getElementById("resultado").innerHTML = "La localidad existe";
+                    } else {
+
+                        document.getElementById("resultado").style.color = "red";
+                        document.getElementById("resultado").innerHTML = "La localidad no existe";
+                    }
+                }
+            }
+
+            xhr.send(null);
+        }
+    </script>
+</body>
+
+</html>

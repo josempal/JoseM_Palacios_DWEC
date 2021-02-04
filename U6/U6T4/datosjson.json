@@ -1,0 +1,23 @@
+[
+  {
+    "titulo": "Mindhunter",
+    "cadena": "Netflix",
+    "director": "David Fincher; Asif Kapadia; Tobias Lindholm; Andrew Douglas",
+    "anyo": "2017",
+    "terminada": "No"
+  },
+  {
+    "titulo": "The Wire",
+    "cadena": "HBO",
+    "director": "David Simon",
+    "anyo": "2002",
+    "terminada": "Si"
+  },
+  {
+    "titulo": "Los Soprano",
+    "cadena": "HBO",
+    "director": "David Chase",
+    "anyo": "1999",
+    "terminada": "Si"
+  }
+]

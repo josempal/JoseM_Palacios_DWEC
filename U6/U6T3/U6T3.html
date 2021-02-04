@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+        
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        th,
+        td {
+            padding: 5px;
+        }
+
+        .rojo {
+            color: red;
+        }
+
+        .amarillo {
+            color: yellow;
+        }
+
+        .verde {
+            color: green;
+        }
+
+        td:first-child {
+
+            font-weight: bold;
+        }
+
+        td:nth-child(3) {
+
+            font-style: italic;
+        }
+    </style>
+    <title>U6T3</title>
+</head>
+
+<body>
+    <div id="texto">
+        <h1>Catalogo de series</h1>
+        <button id="cargaCatalogo">Carga catálogo</button>
+    </div>
+    <table id="demo"></table>
+
+    <script>
+
+        document.getElementById("cargaCatalogo").addEventListener("click", cargarCatalogo);
+
+        function cargarCatalogo() {
+
+            let xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function () {
+
+                if (xhr.readyState == 4 && xhr.status == 200) {
+
+                    cargarXML(xhr);
+                }
+            };
+
+            xhr.open("GET", "series.xml", true);
+            xhr.send();
+        }
+
+        function cargarXML(xml) {
+
+            let docXML = xml.responseXML;
+
+            let tabla = "<tr><th>Título</th><th>Cadena</th><th>Director</th><th>Año</th><th>Terminada</th></tr>";
+            
+            let series = docXML.getElementsByTagName("serie");
+            
+            for (let i = 0; i < series.length; i++) {
+
+                tabla += "<tr><td>";
+
+                tabla += series[i].getElementsByTagName("titulo")[0].textContent;
+
+                tabla += "</td><td>";
+
+                tabla += series[i].getElementsByTagName("cadena")[0].textContent;
+
+                tabla += "</td><td>";
+
+                tabla += series[i].getElementsByTagName("director")[0].textContent;
+
+                tabla += "</td><td>";
+
+                let anyo = series[i].getElementsByTagName("anyo")[0].textContent;
+
+                if (anyo <= 2000) {
+
+                    tabla += "<span class='rojo'>" + anyo + "</span>";
+
+                } else if (anyo >= 2001 && anyo <= 2010) {
+
+                    tabla += "<span class='amarillo'>" + anyo + "</span>";
+
+                } else {
+
+                    tabla += "<span class='verde'>" + anyo + "</span>";
+                }
+
+                tabla += "</td><td>";
+
+                let estado = series[i].getElementsByTagName("terminada")[0].textContent;
+
+                if (estado === "Si") {
+
+                    tabla += "<img src='img/tick.jpeg' style='width: 20px; height: 20px;' /></td></tr>"
+                } else {
+
+                    tabla += "<img src='img/x.jpg' style='width: 20px; height: 20px;' /></td></tr>"
+                }
+
+            }
+
+            document.getElementById("demo").innerHTML = tabla;
+        }
+    </script>
+</body>
+
+</html>

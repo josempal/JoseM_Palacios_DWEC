@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U6T5</title>
+</head>
+
+<body>
+    <label for="titulo">Título de la serie:</label>
+    <input type="text" id="titulo" name="titulo" />
+    <br>
+
+    <label for="director">Director:</label>
+    <input type="text" id="director" name="director" />
+    <br>
+
+    <label for="cadena">Cadena:</label>
+    <input type="text" id="cadena" name="cadena" />
+    <br>
+
+    <label for="anyo">Año:</label>
+    <input type="number" id="anyo" name="anyo" />
+    <br>
+
+    <label for="terminada">Terminada:</label>
+    <input type="checkbox" id="terminada" name="terminada" />
+    <br>
+
+    <input type="button" id="btn" value="Enviar">
+
+    <div id="resultado"></div>
+
+    <script>
+
+
+
+        document.getElementById("btn").addEventListener("click", function () {
+
+            let titulo = document.getElementById("titulo").value;
+            let director = document.getElementById("director").value;
+            let cadena = document.getElementById("cadena").value;
+            let anyo = document.getElementById("anyo").value;
+            let terminada = document.getElementById("terminada").checked;
+
+            let xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function () {
+
+                if (this.readyState == 4 && this.status == 200) {
+
+                    let docJSON = JSON.parse(this.responseText);
+
+                    if (docJSON == "ok") {
+
+                        document.getElementById("resultado").style.color = "green";
+                        document.getElementById("resultado").innerHTML = docJSON;
+                    } else {
+
+                        document.getElementById("resultado").style.color = "red";
+                        document.getElementById("resultado").innerHTML = docJSON;
+                    }
+                    
+                }
+
+            };
+
+            let objeto = JSON.stringify({
+
+                "titulo": titulo,
+                "director": director,
+                "cadena": cadena,
+                "anyo": anyo,
+                "terminada": terminada
+            });
+
+            xhr.open("POST", "create_serie.php", true);
+
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+            xhr.send("objeto=" + objeto);
+        });
+    </script>
+</body>
+
+</html>

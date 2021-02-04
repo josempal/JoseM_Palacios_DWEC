@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<series>
+  <serie>
+    <titulo>Mindhunter</titulo>
+    <cadena>Netflix</cadena>
+    <director>David Fincher; Asif Kapadia; Tobias Lindholm; Andrew Douglas</director> 
+    <anyo>2017</anyo>
+    <terminada>No</terminada>
+  </serie>
+  <serie>
+    <titulo>The Wire</titulo>
+    <cadena>HBO</cadena>
+    <director>David Simon</director> 
+    <anyo>2002</anyo>
+    <terminada>Si</terminada>
+  </serie>
+  <serie>
+    <titulo>Los Soprano</titulo>
+    <cadena>HBO</cadena>
+    <director>David Chase</director> 
+    <anyo>1999</anyo>
+    <terminada>Si</terminada>
+  </serie>
+</series>

@@ -4,63 +4,63 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Hola mundo con AJAX mejorado</title>
-		<script>
-			let READY_STATE_UNITIALIZED = 0;
-			let READY_STATE_LOADING = 1;
-			let READY_STATE_LOADED = 2;
-			let READY_STATE_INTERACTIVE = 3;
-			let READY_STATE_COMPLETE = 4;
-
-			let peticion_http;
-
-			function cargaContenido(url, metodo, funcion) {
-				
-				peticion_http = inicializa_xhr();
-
-				if (peticion_http) {
-					peticion_http.onreadystatechange = funcion;
-					peticion_http.open(metodo, url, true);
-					peticion_http.send(null);
-				}
-			}
-
-			function inicializa_xhr() {
-				
-				if (window.XMLHttpRequest) {
-					return new XMLHttpRequest();
-				} else if (window.ActiveXObject) {
-					
-					return new ActiveXObject("Microsoft.XMLHTTP");
-				}
-			}
-                                                                  
-			function muestraContenido() {
-				
-				if (peticion_http.readyState === READY_STATE_COMPLETE) {
-					
-					if (peticion_http.status === 200) {
-						document.getElementById(tarea).innerHTML = peticion_http.responseText;
-					}
-				}
-			}
-
-			function descargaArchivo() {
-				
-				cargaContenido("http://localhost:8090/U6/U6T1/U6T1.html", "GET", muestraContenido);
-                document.getElementById("btn").addEventListener("click", loadPage);
-			}   
-
-            function loadPage() {
-
-                cargaContenido("http://localhost:8090/U6/U6T1/U6T1.html", "GET", muestraContenido);
-            }
-
-			window.onload = descargaArchivo;
-		</script>
+		
 	</head>
 	<body>
         <input type="text" name="url" id="url"> <br>
         <input type="button" value="Enviar" id="btn"> <br>
         <textarea name="tarea" id="tarea" cols="30" rows="10"></textarea>
-    </body>
+	</body>
+	<script>
+		let READY_STATE_UNITIALIZED = 0;
+		let READY_STATE_LOADING = 1;
+		let READY_STATE_LOADED = 2;
+		let READY_STATE_INTERACTIVE = 3;
+		let READY_STATE_COMPLETE = 4;
+
+		let peticion_http;
+
+		function cargaContenido(url, metodo, funcion) {
+			
+			peticion_http = inicializa_xhr();
+
+			if (peticion_http) {
+				
+				peticion_http.onreadystatechange = funcion;
+				peticion_http.open(metodo, url, true);
+				peticion_http.send(null);
+			}
+		}
+
+		function inicializa_xhr() {
+			
+			if (window.XMLHttpRequest) {
+				return new XMLHttpRequest();
+			} else if (window.ActiveXObject) {
+				
+				return new ActiveXObject("Microsoft.XMLHTTP");
+			}
+		}
+															  
+		function muestraContenido() {
+			
+			if (peticion_http.readyState === READY_STATE_COMPLETE) {
+				
+				if (peticion_http.status === 200) {
+					document.getElementById("tarea").value = peticion_http.responseText;
+				}
+			}
+		} 
+
+		function descargaArchivo() {
+
+			cargaContenido(document.getElementById("url").value, "GET", muestraContenido);
+		}
+
+		window.addEventListener("load", () => {
+
+			document.getElementById("url").value = window.location.href;
+			document.getElementById("btn").addEventListener("click", descargaArchivo);
+		});
+	</script>
 </html>      
