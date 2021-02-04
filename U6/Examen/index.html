@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen U6</title>
+    <style>
+        body {
+
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <select name="ccaa" id="ccaa"></select>
+
+    <br><br>
+
+    <label for="dosAdm">Dosis administradas</label>
+    <input type="number" name="dosAdm" id="dosAdm">
+        
+    <label for="dosEnt">Dosis entregadas</label>
+    <input type="number" name="dosEnt" id="dosEnt">
+    <br><br>
+
+    <label for="dosComp">Dosis pauta completadas</label>
+    <input type="number" name="dosComp" id="dosComp">
+
+    <label for="porEnt">Porcentaje entregadas</label>
+    <input type="number" name="porEnt" id="porEnt">
+    <br><br>
+    <label for="porAdm">Porcentaje población administradas</label>
+    <input type="number" name="porAdm" id="porAdm">
+
+    <label for="porComp">Porcentaje población completas</label>
+    <input type="number" name="porComp" id="porComp">
+
+    <br><br>
+
+    <button type="button" id="modDatos">Modificar datos</button>
+
+    <hr>
+
+    <br><br>
+
+    <div id="resultados">
+
+    </div>
+
+    <br><br>
+
+    <hr>
+
+    <br><br>
+
+    <button type="button" id="xhr">Cargar datos vacunación (XHR)</button>
+    
+    <button type="button" id="fetch">Cargar datos vacunación (Fetch)</button>
+
+    <br><br>
+
+    <table name="tabla" id="tabla"></table>
+    
+    <script src="script.js"></script>
+</body>
+</html>

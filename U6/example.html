@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        fetch('/echo/json/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(objeto_datos)
+        })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (result) {
+                alert(result);
+            })
+            .catch(function (error) {
+                console.log('Request failed', error);
+            });
+
+        fetch("holamundo.txt")
+            .then((response) => response.text())
+            .then((texto) => {
+                console.log(texto);
+            })
+            .catch((error) => {
+                console.log("Error: " + error);
+            });
+
+        fetch("catalogo.xml")
+            .then((response) => response.text())
+            .then((str) => new window.DOMParser().parseFromString(str, "text/xml"))
+            .then((data) => console.log(data))
+            .catch((err) => console.log(err));
+
+        fetch("personajes.json")
+            .then((response) => response.json())
+            .then((data) => console.log(data))
+            .catch((err) => console.log(err));
+
+    </script>
+</body>
+
+</html>
