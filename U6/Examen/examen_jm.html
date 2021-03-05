@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Examen</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 5px;
+      }
+      .rojo {
+        color: red;
+      }
+      .amarillo {
+        color: rgb(197, 197, 0);
+      }
+      .verde {
+        color: green;
+      }
+    </style>
+  </head>
+
+  <body>
+    <label>CC.AA.: </label>
+    <select id="ccaa"></select>
+    <label>D. Entregadas: </label>
+    <input type="number" id="d_entregadas" />
+    <label>D. Admin.: </label>
+    <input type="number" id="d_admin" />
+    <label>D. Completa: </label>
+    <input type="number" id="d_completa" />
+    <label>P. Entregadas: </label>
+    <input type="number" step="0.01" id="p_entregadas" />
+    <label>P. Admin: </label>
+    <input type="number" step="0.01" id="p_admin" />
+    <label>P. Completa: </label>
+    <input type="number" step="0.01" id="p_completa" />
+
+    <button id="enviar">Modificar datos</button>
+
+    <hr />
+    <div>
+      <label>Resultados </label>
+      <div id="resultados"></div>
+    </div>
+    <hr />
+
+    <div id="texto">
+      <h1>Tabla de vacunacion</h1>
+      <button id="carga_datos_vacunacion_xml">
+        Cargar datos vacunación (XMLHttpRequest)
+      </button>
+      <button id="carga_datos_vacunacion_fetch">
+        Cargar datos vacunación (Fetch)
+      </button>
+    </div>
+    <table id="demo"></table>
+  </body>
+  <script>
+    document
+      .getElementById("carga_datos_vacunacion_xml")
+      .addEventListener("click", carga_datos_vacunacion_xml);
+    document
+      .getElementById("carga_datos_vacunacion_fetch")
+      .addEventListener("click", carga_datos_vacunacion_fetch);
+
+    document
+      .getElementById("enviar")
+      .addEventListener("click", actualizar_comunidad);
+
+    let comunidades = [];
+    let respuesta_insercion;
+
+    function genera_seleccionable() {
+      document.getElementById("ccaa").innerHTML = "";
+      let select = document.getElementById("ccaa");
+
+      // Crear y añadir options
+      for (let comunidad of comunidades) {
+        let option = document.createElement("option");
+        option.value = comunidad.ccaa;
+        option.text = comunidad.ccaa;
+        select.appendChild(option);
+      }
+    }
+
+    function carga_datos_vacunacion_xml() {
+      let xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          let data = JSON.parse(xhr.responseText);
+          procesar_respuesta(data);
+        }
+      };
+      xhr.open("GET", "https://covid-vacuna.app/data/latest.json", true);
+      xhr.send();
+    }
+
+    function procesar_respuesta(data) {
+      comunidades = [];
+      for (let comunidad of data) {
+        if (comunidad.ccaa == "Totales") continue;
+        comunidades.push(comunidad);
+      }
+      document.getElementById("resultados").innerHTML =
+        "Datos cargados de la WEB";
+      insertar_comunidades(comunidades);
+      genera_seleccionable();
+    }
+
+    function carga_datos_vacunacion_fetch() {
+      fetch("https://covid-vacuna.app/data/latest.json")
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
+        })
+        .then((data) => {
+          procesar_respuesta(data);
+        })
+        .catch((err) => console.log("chema: " + err));
+    }
+
+    function procesar_comunidades(comunidades) {
+      let tabla =
+        "<tr><th>Comunidad</th><th>D. Entregadas</th><th>D. Admin</th><th>D. Completa</th><th>% Entregadas</th>" +
+        "<th>% Pobl. Admin.</th><th>% Pobl. Completa</th></tr>";
+      console.log(comunidades.length);
+      for (let comunidad of comunidades) {
+        tabla += "<tr><td>";
+        tabla += comunidad.ccaa;
+        tabla += "</td><td>";
+        tabla += comunidad.dosisEntregadas;
+        tabla += "</td><td>";
+        tabla += comunidad.dosisAdministradas;
+        tabla += "</td><td>";
+        tabla += comunidad.dosisPautaCompletada;
+        tabla += "</td><td>";
+        tabla += parseFloat(comunidad.porcentajeEntregadas * 100).toFixed(2);
+        tabla += "</td><td>";
+        tabla += parseFloat(
+          comunidad.porcentajePoblacionAdministradas * 100
+        ).toFixed(2);
+        tabla += "</td><td>";
+        tabla += parseFloat(
+          comunidad.porcentajePoblacionCompletas * 100
+        ).toFixed(2);
+        tabla += "</td></tr>";
+      }
+      document.getElementById("demo").innerHTML = tabla;
+    }
+
+    function actualizar_comunidad() {
+      let comunidad = {
+        ccaa: document.getElementById("ccaa").value,
+        dosisEntregadas: parseInt(
+          document.getElementById("d_entregadas").value
+        ),
+        dosisAdministradas: parseInt(document.getElementById("d_admin").value),
+        dosisPautaCompletada: parseInt(
+          document.getElementById("d_completa").value
+        ),
+        porcentajeEntregadas: parseFloat(
+          document.getElementById("p_entregadas").value
+        ),
+        porcentajePoblacionAdministradas: parseFloat(
+          document.getElementById("p_admin").value
+        ),
+        porcentajePoblacionCompletas: parseFloat(
+          document.getElementById("p_completa").value
+        ),
+      };
+
+      fetch("actualizar_comunidad.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(comunidad),
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
+        })
+        .then((data) => {
+          for (let i = 0; i < comunidades.length; i++) {
+            if (data.ccaa === comunidades[i].ccaa) {
+              comunidades[i] = data;
+            }
+          }
+          document.getElementById("resultados").innerHTML =
+            "Comunidad actualizada";
+          procesar_comunidades(comunidades);
+        })
+        .catch((err) => console.log("chema: " + err));
+    }
+
+    function insertar_comunidades(comunidades) {
+      fetch("insertar_comunidades.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(comunidades),
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
+        })
+        .then((data) => {
+          procesar_comunidades(data);
+        })
+        .catch((err) => console.log("chema: " + err));
+    }
+  </script>
+</html>

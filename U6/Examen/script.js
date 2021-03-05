@@ -1,7 +1,7 @@
 
 document.getElementById("xhr").addEventListener("click", cargaXHR);
-/* document.getElementById("fetch").addEventListener("click", cargaFetch);
- */
+document.getElementById("fetch").addEventListener("click", cargaFetch);
+
 
 function cargaXHR() {
 
@@ -14,6 +14,8 @@ function cargaXHR() {
             let vacunas = JSON.parse(xhr.responseText);
 
             cargarJSON(vacunas);
+            document.getElementById("resultados").innerHTML =
+                "Datos cargados de la WEB";
         }
     };
 
@@ -26,8 +28,8 @@ function cargarJSON(docJSON) {
 
     let comunidades = new Array();
 
-    for (let i = 0; i<docJSON.length; i++){
-        if(docJSON[i].ccaa != "Totales"){
+    for (let i = 0; i < docJSON.length; i++) {
+        if (docJSON[i].ccaa != "Totales") {
             let obj = {
                 "ccaa": docJSON[i].ccaa,
                 "dosisAdministradas": docJSON[i].dosisAdministradas,
@@ -37,13 +39,13 @@ function cargarJSON(docJSON) {
                 "porcentajePoblacionAdministradas": docJSON[i].porcentajePoblacionAdministradas,
                 "porcentajePoblacionCompletas": docJSON[i].porcentajePoblacionCompletas
             }
-            comunidades[i] = obj; 
+            comunidades[i] = obj;
         }
     }
 
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
-        if(xhr.readyState == 4 && xhr.status == 200){
+        if (xhr.readyState == 4 && xhr.status == 200) {
             console.log(this.responseText);
             let respuesta = JSON.parse(this.responseText);
             cargaTablaXhr(respuesta);
@@ -55,50 +57,23 @@ function cargarJSON(docJSON) {
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.send(parametros);
 
+    genera_seleccionable(comunidades);
 }
 
-/* function insertarCcaaXhr(vacunas) {
+function genera_seleccionable(comunidades) {
+    document.getElementById("ccaa").innerHTML = "";
+    let select = document.getElementById("ccaa");
 
-    let xhr = new XMLHttpRequest();
-
-
-    let vacunasSinTotales = [];
-
-    for (let i = 0; i < vacunas.length; i++) {
-        
-        if (vacunas[i].ccaa != "Totales") {
-            
-            let comunidad = {
-                "ccaa": vacunas[i].ccaa,
-                "dosisAdministradas": vacunas[i].dosisAdministradas,
-                "dosisEntregadas": vacunas[i].dosisEntregadas,
-                "dosisPautaCompletada": vacunas[i].dosisPautaCompletada,
-                "porcentajeEntregadas": vacunas[i].porcentajeEntregadas,
-                "porcentajePoblacionAdministradas": vacunas[i].porcentajePoblacionAdministradas,
-                "porcentajePoblacionCompletas": vacunas[i].porcentajePoblacionCompletas
-            }
-
-            console.log(comunidad);
-            vacunasSinTotales[i] = comunidad; 
-        }
+    // Crear y añadir options
+    for (let comunidad of comunidades) {
+      let option = document.createElement("option");
+      option.value = comunidad.ccaa;
+      option.text = comunidad.ccaa;
+      select.appendChild(option);
     }
+  }
 
-    xhr.onreadystatechange = function () {
 
-        if (xhr.readyState == 4 && xhr.status == 200) {
-
-            let vacunasFiltradas = JSON.parse(xhr.responseText);
-
-            cargaTablaXhr(vacunasFiltradas);
-        }
-
-    }
-    let parametros = JSON.stringify(vacunasSinTotales);
-    xhr.open("POST", "insertar_comunidades.php", true);
-    xhr.setRequestHeader("Content-type", "application/json");
-    xhr.send(parametros);
-}
- */
 function cargaTablaXhr(vacunas) {
 
     let tabla = document.getElementById("tabla");
@@ -142,33 +117,18 @@ function cargaTablaXhr(vacunas) {
     tabla.innerHTML = tablaCont;
 }
 
-    /*    function cargaFetch() {
-   
-   
-   
-   
-   
-   
-       } */
+function cargaFetch() {
 
+    fetch('latest.json')
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            }
+        })
+        .then( (result) => {
+            cargarJSON(result);
+        })
+        .catch((err) => console.log("chema: " + err));
+}
 
-/* fetch('latest.json', {
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(vacunas)
-})
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (result) {
-        alert(result);
-    })
-    .catch(function (error) {
-        console.log('Request failed', error);
-    });
-
-
-*/
 
