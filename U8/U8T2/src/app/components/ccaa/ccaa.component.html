@@ -1,0 +1,61 @@
+<div class="center">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z1">
+      <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+      <!-- Columna ccaa -->
+      <ng-container matColumnDef="ccaa">
+        <th mat-header-cell *matHeaderCellDef>Comunidad</th>
+        <td mat-cell *matCellDef="let element">{{ element.ccaa }}</td>
+      </ng-container>
+  
+      <!-- Columna Dosis entregadas -->
+      <ng-container matColumnDef="dosisEntregadas">
+        <th mat-header-cell *matHeaderCellDef>D. Entregadas</th>
+        <td mat-cell *matCellDef="let element">{{ element.dosisEntregadas }}</td>
+      </ng-container>
+  
+      <!-- Columna Dosis administradas -->
+      <ng-container matColumnDef="dosisAdministradas">
+        <th mat-header-cell *matHeaderCellDef>D. Admin</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.dosisAdministradas }}
+        </td>
+      </ng-container>
+  
+      <!-- Columna Dosis completa -->
+      <ng-container matColumnDef="dosisPautaCompletada">
+        <th mat-header-cell *matHeaderCellDef>D. Completa</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.dosisPautaCompletada }}
+        </td>
+      </ng-container>
+  
+      <!-- Columna % Entregadas -->
+      <ng-container matColumnDef="porcentajeEntregadas">
+        <th mat-header-cell *matHeaderCellDef>% Entregadas</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.porcentajeEntregadas }}
+        </td>
+      </ng-container>
+  
+      <!-- Columna % Pobl. Admin -->
+      <ng-container matColumnDef="porcentajePoblacionAdministradas">
+        <th mat-header-cell *matHeaderCellDef>% Admin</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.porcentajePoblacionAdministradas }}
+        </td>
+      </ng-container>
+  
+      <!-- Columna % Pobl. Completa -->
+      <ng-container matColumnDef="porcentajePoblacionCompletas">
+        <th mat-header-cell *matHeaderCellDef>% Completa</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.porcentajePoblacionCompletas }}
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>

@@ -13,7 +13,7 @@ function cargaXHR() {
 
             let vacunas = JSON.parse(xhr.responseText);
 
-            insertarCcaaXhr(vacunas);
+            cargarJSON(vacunas);
         }
     };
 
@@ -21,17 +21,65 @@ function cargaXHR() {
     xhr.send();
 }
 
-function insertarCcaaXhr(vacunas) {
+function cargarJSON(docJSON) {
+
+
+    let comunidades = new Array();
+
+    for (let i = 0; i<docJSON.length; i++){
+        if(docJSON[i].ccaa != "Totales"){
+            let obj = {
+                "ccaa": docJSON[i].ccaa,
+                "dosisAdministradas": docJSON[i].dosisAdministradas,
+                "dosisEntregadas": docJSON[i].dosisEntregadas,
+                "dosisPautaCompletada": docJSON[i].dosisPautaCompletada,
+                "porcentajeEntregadas": docJSON[i].porcentajeEntregadas,
+                "porcentajePoblacionAdministradas": docJSON[i].porcentajePoblacionAdministradas,
+                "porcentajePoblacionCompletas": docJSON[i].porcentajePoblacionCompletas
+            }
+            comunidades[i] = obj; 
+        }
+    }
+
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if(xhr.readyState == 4 && xhr.status == 200){
+            console.log(this.responseText);
+            let respuesta = JSON.parse(this.responseText);
+            cargaTablaXhr(respuesta);
+        }
+    }
+
+    let parametros = JSON.stringify(comunidades);
+    xhr.open("POST", "insertar_comunidades.php", true);
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send(parametros);
+
+}
+
+/* function insertarCcaaXhr(vacunas) {
 
     let xhr = new XMLHttpRequest();
 
-    let vacunasSinTotales = "";
 
-    for (x of vacunas) {
+    let vacunasSinTotales = [];
 
-        if (x.ccaa != "Totales") {
+    for (let i = 0; i < vacunas.length; i++) {
+        
+        if (vacunas[i].ccaa != "Totales") {
+            
+            let comunidad = {
+                "ccaa": vacunas[i].ccaa,
+                "dosisAdministradas": vacunas[i].dosisAdministradas,
+                "dosisEntregadas": vacunas[i].dosisEntregadas,
+                "dosisPautaCompletada": vacunas[i].dosisPautaCompletada,
+                "porcentajeEntregadas": vacunas[i].porcentajeEntregadas,
+                "porcentajePoblacionAdministradas": vacunas[i].porcentajePoblacionAdministradas,
+                "porcentajePoblacionCompletas": vacunas[i].porcentajePoblacionCompletas
+            }
 
-            vacunasSinTotales += x;
+            console.log(comunidad);
+            vacunasSinTotales[i] = comunidad; 
         }
     }
 
@@ -45,12 +93,12 @@ function insertarCcaaXhr(vacunas) {
         }
 
     }
-
-        xhr.open("POST", "insertar_comunidades.php", true);
-        xhr.setRequestHeader("Content-type", "application/json");
-        xhr.send(vacunasSinTotales);
+    let parametros = JSON.stringify(vacunasSinTotales);
+    xhr.open("POST", "insertar_comunidades.php", true);
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send(parametros);
 }
-
+ */
 function cargaTablaXhr(vacunas) {
 
     let tabla = document.getElementById("tabla");

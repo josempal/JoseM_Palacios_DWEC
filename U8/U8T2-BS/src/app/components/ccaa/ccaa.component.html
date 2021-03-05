@@ -1,0 +1,24 @@
+<table class="table">
+    <thead>
+    <tr>
+      <th scope="col">CCAA</th>
+      <th scope="col">D. entregadas</th>
+      <th scope="col">D. administradas</th>
+      <th scope="col">D. completas</th>
+      <th scope="col">% entregadas</th>
+      <th scope="col">% completa</th>
+      <th scope="col">% admin</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let comunidad of dataSource" >
+      <td> {{ comunidad.ccaa }}</td>
+      <td> {{ comunidad.dosisEntregadas }} </td>
+      <td> {{ comunidad.dosisAdministradas }} </td>
+      <td> {{ comunidad.dosisPautaCompletada }} </td>
+      <td> {{ comunidad.porcentajeEntregadas }} </td>
+      <td> {{ comunidad.porcentajePoblacionCompletas }} </td>
+      <td> {{ comunidad.porcentajePoblacionAdministradas }} </td>
+    </tr>
+    </tbody>
+  </table>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U7T1</title>
+</head>
+
+<style>
+    p {
+
+        display: inline-block;
+    }
+
+    #warning {
+
+        color: rgba(214, 32, 32, 0.438);
+    }
+</style>
+
+<body>
+
+    <form name="form" id="form">
+        <label for="area">AREA DE ALMACENAMIENTO:</label>
+        <select name="area" id="area">
+            <option value="local">LOCAL</option>
+            <option value="session">SESSION</option>
+        </select>
+
+        <br>
+
+        <label for="key">CLAVE</label>
+        <input type="text" name="key" id="key">
+
+        <br>
+
+        <label for="value">VALOR</label>
+        <input type="text" name="value" id="value">
+
+        <span id="warning"></span>
+        <br><br>
+
+        <button type="button" id="save">GUARDAR</button>
+        <button type="button" id="delete">ELIMINAR</button>
+        <button type="button" id="refresh">REFRESCAR</button>
+        <button type="button" id="compatibility">COMPROBAR COMPATIBILIDAD DEL NAVEGADOR</button>
+
+        <br><br>
+        <p>
+            <label for="localStorage">CLAVES Y VALORES EN LOCAL STORAGE:</label>
+            <br>
+            <textarea name="localStorage" id="localStorage" cols="50" rows="10"></textarea>
+        </p>
+
+        <p>
+            <label for="sessionStorage">CLAVES Y VALORES EN SESSION STORAGE:</label>
+            <br>
+            <textarea name="sessionStorage" id="sessionStorage" cols="50" rows="10"></textarea>
+        </p>
+    </form>
+
+    <script src="script.js" type="text/javascript"></script>
+</body>
+
+</html>

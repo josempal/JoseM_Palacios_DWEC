@@ -1,0 +1,47 @@
+<mat-form-field appearance="fill">
+  <mat-label>Comunidad</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let ccaa of ccaas" value="{{ ccaa }}">{{
+      ccaa
+    }}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+&nbsp;
+<mat-form-field class="example-full-width">
+  <mat-label>D. Entregas</mat-label>
+  <input matInput placeholder="" value="">
+</mat-form-field>
+&nbsp;
+
+<mat-form-field class="example-full-width">
+  <mat-label>D. Admin.</mat-label>
+  <input matInput placeholder="" value="">
+</mat-form-field>
+&nbsp;
+
+<mat-form-field class="example-full-width">
+  <mat-label>D. Completas</mat-label>
+  <input matInput placeholder="" value="">
+</mat-form-field>
+<br>
+&nbsp;
+
+<mat-form-field class="example-full-width">
+  <mat-label>P. Entregas</mat-label>
+  <input matInput placeholder="" value="">
+</mat-form-field>
+
+&nbsp;
+<mat-form-field class="example-full-width">
+  <mat-label>P. Admin.</mat-label>
+  <input matInput placeholder="" value="">
+</mat-form-field>
+&nbsp;
+<mat-form-field class="example-full-width">
+  <mat-label>P. Completas</mat-label>
+  <input matInput placeholder="" value="">
+</mat-form-field>
+&nbsp;
+
+<button mat-raised-button (click)="click()">Obtener datos vacunación</button>
